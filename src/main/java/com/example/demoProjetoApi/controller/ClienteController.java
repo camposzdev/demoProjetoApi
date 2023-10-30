@@ -29,4 +29,8 @@ public class ClienteController {
         return cliRepo.findById(cod);
     }
 
+    public List<Cliente> buscarPorParteNome(@PathVariable("partenome")String parteNome){
+        return cliRepo.findByParteNome(parteNome);
+    }
+
 }
