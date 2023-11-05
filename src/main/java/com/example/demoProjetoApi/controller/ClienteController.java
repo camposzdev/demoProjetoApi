@@ -1,12 +1,10 @@
 package com.example.demoProjetoApi.controller;
 
 import com.example.demoProjetoApi.model.Cliente;
+import com.example.demoProjetoApi.model.Produto;
 import com.example.demoProjetoApi.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,8 +27,25 @@ public class ClienteController {
         return cliRepo.findById(cod);
     }
 
+    @GetMapping("/nome{partenome}")
     public List<Cliente> buscarPorParteNome(@PathVariable("partenome")String parteNome){
         return cliRepo.findByParteNome(parteNome);
     }
 
+    @GetMapping("/email/{email}")
+    public List<Cliente> buscarClientesPorEmail(@PathVariable String email) {
+        return cliRepo.buscarClientesPorEmail(email);
+    }
+
+    @DeleteMapping("/{cod}")
+    public void removerCliente(@PathVariable int cod) {
+        cliRepo.removerCliente(cod);
+    }
+
+    @PutMapping("/atualizarCliente")
+    public void atualizarCliente(@RequestBody Cliente cliente)
+    {
+        cliRepo.save(cliente);
+    }
 }
+
