@@ -28,18 +28,26 @@ public class ClienteController {
     }
 
     @GetMapping("/nome{partenome}")
-    public List<Cliente> buscarPorParteNome(@PathVariable("partenome")String parteNome){
+    public List<Cliente> findByParteNome(@PathVariable("partenome")String parteNome){
         return cliRepo.findByParteNome(parteNome);
     }
 
     @GetMapping("/email/{email}")
-    public List<Cliente> buscarClientesPorEmail(@PathVariable String email) {
-        return cliRepo.buscarClientesPorEmail(email);
+    public List<Cliente> buscarPorParteEmail(@PathVariable String email) {
+        return cliRepo.buscarParteEmail(email);
     }
 
-    @DeleteMapping("/{cod}")
-    public void removerCliente(@PathVariable int cod) {
-        cliRepo.removerCliente(cod);
+    @GetMapping("/todos/parteemail/{email}")
+    public List<Cliente> buscarPorParteNome(@PathVariable("partenome")String parteNome){
+        return cliRepo.findByParteNome(parteNome);
+    }
+
+    @DeleteMapping("/remover")
+    public void removerCliente(Cliente cliente){cliRepo.delete(cliente);}
+
+    @DeleteMapping("/remover/cod/{cod}")
+    public void removerPorId(@PathVariable("cod") int cod) {
+        cliRepo.deleteById(cod);
     }
 
     @PutMapping("/atualizarCliente")

@@ -14,7 +14,7 @@ public class Produto {
     @Column
     private String descr;
     private String marca;
-    private String preco;
+    private double preco;
 
     public int getCod() {
         return cod;
@@ -40,11 +40,11 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 }

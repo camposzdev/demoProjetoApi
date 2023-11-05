@@ -1,5 +1,6 @@
 package com.example.demoProjetoApi.controller;
 
+import com.example.demoProjetoApi.model.Cliente;
 import com.example.demoProjetoApi.model.Produto;
 import com.example.demoProjetoApi.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,12 @@ public class ProdutoController {
         return prodRepo.findById(cod);
     }
 
-    @GetMapping("/descricao/{descricao}")
-    public List<Produto> buscarProdutosPorDescricao(@PathVariable String descricao) {
-        return prodRepo.buscarProdutosPorDescricao(descricao);
+    @GetMapping("/descricao/{descr}")
+    public List<Produto> buscarProdutosPorDescricao(@PathVariable String descr) {
+        return prodRepo.buscarProdutosPorDescricao(descr);
     }
 
-    @GetMapping("/preco-menor/{preco}")
+    @GetMapping("/precomenor/{preco}")
     public List<Produto> buscarProdutosPorPrecoMenorQue(@PathVariable double preco) {
         return prodRepo.buscarProdutosPorPrecoMenorQue(preco);
     }
@@ -49,14 +50,12 @@ public class ProdutoController {
         return prodRepo.buscarProdutosPorMarcaEPrecoMenorQue(marca, preco);
     }
 
-    @PutMapping("/{codigo}")
-    public Produto atualizarProduto(@PathVariable Long codigo, @RequestBody Produto produto) {
-        return prodRepo.atualizarProduto(codigo, produto);
-    }
+    @DeleteMapping("/remover")
+    public void removerProduto(Produto produto){prodRepo.delete(produto);}
 
     @DeleteMapping("/{codigo}")
-    public void removerProduto(@PathVariable Long codigo) {
-        prodRepo.removerProduto(codigo);
+    public void removerProdutoPorCod(@PathVariable ("cod") int cod) {
+        prodRepo.deleteById(cod);
     }
 
     @PutMapping("/atualizarProduto")
